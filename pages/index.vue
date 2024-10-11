@@ -6,7 +6,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div v-for="post in posts" :key="post.id" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <img :src="post.image" :alt="post.title" class="w-full h-48 object-cover" loading="lazy">
+        <img src="/profile-picture.jpg" :alt="post.title" class="w-full h-48 object-cover" loading="lazy">
         <div class="p-4">
           <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">{{ post.title }}</h3>
           <p class="text-gray-600 dark:text-gray-300 mb-4">{{ post.content.substring(0, 100) }}...</p>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+import { useDebounceFn } from '@vueuse/core'
+
 const { data: posts, refresh } = await useFetch('/api/posts')
 const searchTerm = ref('')
 
