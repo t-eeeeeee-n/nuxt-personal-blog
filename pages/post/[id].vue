@@ -1,6 +1,7 @@
 <template>
   <div v-if="post" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-    <img :src="post.image" :alt="post.title" class="w-full h-64 object-cover" loading="lazy">
+<!--    <img :src="post.image" :alt="post.title" class="w-full h-64 object-cover" loading="lazy">-->
+    <img src="/profile-picture.jpg" :alt="post.title" class="w-64 h-64 rounded-full mx-auto mb-6 object-cover" loading="lazy">
     <div class="p-6">
       <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">{{ post.title }}</h2>
       <p class="text-gray-600 dark:text-gray-300 mb-6">{{ post.content }}</p>
@@ -38,7 +39,12 @@ const { data: post } = await useFetch(`/api/posts/${route.params.id}`)
 
 const newComment = ref({ content: '', author: '' })
 
-const currentUrl = computed(() => window.location.href)
+const currentUrl = computed(() => {
+  if (process.client) {
+    return window.location.href;
+  }
+  return '';
+});
 
 const addComment = async () => {
   if (newComment.value.content && newComment.value.author) {
