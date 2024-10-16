@@ -1,12 +1,16 @@
-import { PrismaClient } from '@prisma/client'
+import {PrismaClient} from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
-  const posts = await prisma.post.findMany({
+  return prisma.post.findMany({
     include: {
       author: true,
     },
-  })
-  return posts
+  });
+
+  // =================================
+  // import { posts } from '../data/posts';
+  //
+  // return posts;
 })

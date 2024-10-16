@@ -5,13 +5,13 @@ const prisma = new PrismaClient()
 
 async function main() {
     // ユーザーを作成
-    // const user = await prisma.user.create({
-    //     data: {
-    //         email: 'testuser@example.com',
-    //         name: 'Test User',
-    //         password: 'securepassword',
-    //     },
-    // })
+    const user = await prisma.user.create({
+        data: {
+            email: 'testuser@example.com',
+            name: 'Test User',
+            password: 'securepassword',
+        },
+    })
 
     // 複数の投稿を作成
     const postsData = [
